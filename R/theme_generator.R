@@ -42,36 +42,54 @@ generate_dark_theme_from <- function(pallet) {
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_color_with_name <- function(pallet) {
-  return(ggplot2::scale_color_manual(values = pallet))
+  inner <- function(...) {
+    ggplot2::scale_color_manual(values = pallet, ...)
+  }
+  return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_fill_with_name <- function(pallet) {
-  return(ggplot2::scale_fill_manual(values = pallet))
+  inner <- function(...) {
+    ggplot2::scale_fill_manual(values = pallet, ...)
+  }
+  return(inner)
 }
 
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_color_discrete <- function(pallet) {
-  return(ggplot2::scale_color_manual(values = as.vector(remove_bw(pallet))))
+  inner <- function(...) {
+    ggplot2::scale_color_manual(values = as.vector(remove_bw(pallet)), ...)
+  }
+  return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_fill_discrete <- function(pallet) {
-  return(ggplot2::scale_fill_manual(values = as.vector(remove_bw(pallet))))
+  inner <- function(...) {
+    ggplot2::scale_fill_manual(values = as.vector(remove_bw(pallet)), ...)
+  }
+  return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_gradientn
 #' @export
 generate_scale_color_gradient <- function(pallet, color_seq) {
-  return(ggplot2::scale_color_gradientn(colors = pallet[color_seq]))
+  inner <- function(...) {
+    ggplot2::scale_color_gradientn(colors = pallet[color_seq], ...)
+  }
+  return(inner)
 }
 
 #' @importFrom ggplot2 scale_fill_gradientn
 #' @export
 generate_scale_fill_gradient <- function(pallet, color_seq) {
-  return(ggplot2::scale_fill_gradientn(colors = pallet[color_seq]))
+  inner <- function(...) {
+    ggplot2::scale_fill_gradientn(colors = pallet[color_seq], ...)
+  }
+  return(inner)
 }
