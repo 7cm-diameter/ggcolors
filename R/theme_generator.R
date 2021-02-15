@@ -1,11 +1,25 @@
+# helper functions to generate a color theme
 remove_bw <- function(pallet) {
-  removed_colors <- c("black", "white", "brightblack", "brightlight")
-  x <- pallet[pallet != pallet[removed_colors]]
-  return(Filter(function(x) !is.na(x), x))
+  removed_colors <- c("black", "white", "brightblack", "brightwhite")
+  for (rc in removed_colors) {
+    pallet[rc] <- NA
+  }
+  return(Filter(function(x) !is.na(x), pallet))
+}
+
+generate_pallet <- function(colors) {
+  colors <- remove_bw(colors)
+  max_n <- length(colors)
+  f <- function(n) {
+    ntimes <- n %/% max_n + 1
+    colors <- rep(colors, ntimes)
+    return(unname(colors))
+  }
+  return(f)
 }
 
 #' @export
-generate_color_pallet <- function(black, white, brightblack, brightwhite, ...) {
+generate_named_color <- function(black, white, brightblack, brightwhite, ...) {
   return(c(black = black, white = white,
            brightblack = brightblack,
            brightwhite = brightwhite, ...))
@@ -16,23 +30,23 @@ generate_color_pallet <- function(black, white, brightblack, brightwhite, ...) {
 #' @importFrom ggplot2 element_rect
 #' @importFrom ggplot2 element_text
 #' @export
-generate_dark_theme_from <- function(pallet) {
+generate_dark_theme_from <- function(colors) {
   inner <- function(...) {
-    theme(plot.background = element_rect(fill = pallet["black"]),
-          panel.background = element_rect(fill = pallet["black"]),
-          panel.grid.major = element_line(color = pallet["brightblack"]),
-          panel.grid.minor = element_line(color = pallet["brightblack"]),
-          panel.border = element_rect(color = pallet["brightblack"], fill = NA),
-          legend.background = element_rect(color = pallet["brightblack"],
-                                           fill = pallet["black"]),
-          legend.key = element_rect(fill = pallet["black"]),
-          legend.title = element_text(color = pallet["white"]),
-          legend.text = element_text(color = pallet["white"]),
-          strip.background = element_rect(color = pallet["brightblack"]),
-          axis.text = element_text(color = pallet["brightwhite"]),
-          axis.line = element_line(color = pallet["brightblack"]),
-          axis.ticks = element_line(color = pallet["brightblack"]),
-          axis.title = element_text(color = pallet["white"]),
+    theme(plot.background = element_rect(fill = colors["black"]),
+          panel.background = element_rect(fill = colors["black"]),
+          panel.grid.major = element_line(color = colors["brightblack"]),
+          panel.grid.minor = element_line(color = colors["brightblack"]),
+          panel.border = element_rect(color = colors["brightblack"], fill = NA),
+          legend.background = element_rect(color = colors["brightblack"],
+                                           fill = colors["black"]),
+          legend.key = element_rect(fill = colors["black"]),
+          legend.title = element_text(color = colors["white"]),
+          legend.text = element_text(color = colors["white"]),
+          strip.background = element_rect(color = colors["brightblack"]),
+          axis.text = element_text(color = colors["brightwhite"]),
+          axis.line = element_line(color = colors["brightblack"]),
+          axis.ticks = element_line(color = colors["brightblack"]),
+          axis.title = element_text(color = colors["white"]),
           ...
     )
   }
@@ -69,18 +83,18 @@ generate_light_theme_from <- function(pallet) {
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
-generate_scale_color_with_name <- function(pallet) {
+generate_scale_color_with_name <- function(colors) {
   inner <- function(...) {
-    ggplot2::scale_color_manual(values = pallet, ...)
+    ggplot2::scale_color_manual(values = colors, ...)
   }
   return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
-generate_scale_fill_with_name <- function(pallet) {
+generate_scale_fill_with_name <- function(colors) {
   inner <- function(...) {
-    ggplot2::scale_fill_manual(values = pallet, ...)
+    ggplot2::scale_fill_manual(values = colors, ...)
   }
   return(inner)
 }
@@ -88,36 +102,36 @@ generate_scale_fill_with_name <- function(pallet) {
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
-generate_scale_color_discrete <- function(pallet) {
+generate_scale_color_discrete <- function(name, colors) {
   inner <- function(...) {
-    ggplot2::scale_color_manual(values = as.vector(remove_bw(pallet)), ...)
+    ggplot2::discrete_scale("color", name, generate_pallet(colors), ...)
   }
   return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_manual
 #' @export
-generate_scale_fill_discrete <- function(pallet) {
+generate_scale_fill_discrete <- function(name, colors) {
   inner <- function(...) {
-    ggplot2::scale_fill_manual(values = as.vector(remove_bw(pallet)), ...)
+    ggplot2::discrete_scale("fill", name, generate_pallet(colors), ...)
   }
   return(inner)
 }
 
 #' @importFrom ggplot2 scale_color_gradientn
 #' @export
-generate_scale_color_gradient <- function(pallet, color_seq) {
+generate_scale_color_gradient <- function(colors, color_seq) {
   inner <- function(...) {
-    ggplot2::scale_color_gradientn(colors = pallet[color_seq], ...)
+    ggplot2::scale_color_gradientn(colors = colors[color_seq], ...)
   }
   return(inner)
 }
 
 #' @importFrom ggplot2 scale_fill_gradientn
 #' @export
-generate_scale_fill_gradient <- function(pallet, color_seq) {
+generate_scale_fill_gradient <- function(colors, color_seq) {
   inner <- function(...) {
-    ggplot2::scale_fill_gradientn(colors = pallet[color_seq], ...)
+    ggplot2::scale_fill_gradientn(colors = colors[color_seq], ...)
   }
   return(inner)
 }
