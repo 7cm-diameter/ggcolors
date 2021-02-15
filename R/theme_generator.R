@@ -39,6 +39,34 @@ generate_dark_theme_from <- function(pallet) {
   return(inner)
 }
 
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_rect
+#' @importFrom ggplot2 element_text
+#' @export
+generate_light_theme_from <- function(pallet) {
+  inner <- function(...) {
+    theme(plot.background = element_rect(fill = pallet["white"]),
+          panel.background = element_rect(fill = pallet["white"]),
+          panel.grid.major = element_line(color = pallet["brightwhite"]),
+          panel.grid.minor = element_line(color = pallet["brightwhite"]),
+          panel.border = element_rect(color = pallet["brightwhite"], fill = NA),
+          legend.background = element_rect(color = pallet["brightwhite"],
+                                           fill = pallet["white"]),
+          legend.key = element_rect(fill = pallet["white"]),
+          legend.title = element_text(color = pallet["black"]),
+          legend.text = element_text(color = pallet["black"]),
+          strip.background = element_rect(color = pallet["brightwhite"]),
+          axis.text = element_text(color = pallet["brightblack"]),
+          axis.line = element_line(color = pallet["brightwhite"]),
+          axis.ticks = element_line(color = pallet["brightwhite"]),
+          axis.title = element_text(color = pallet["black"]),
+          ...
+    )
+  }
+  return(inner)
+}
+
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_color_with_name <- function(pallet) {
