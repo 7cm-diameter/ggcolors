@@ -10,12 +10,19 @@ thanatos_dark <- generate_named_colors(background    = "#3a5068",
                                        brightblue    = "#77a4b9",
                                        brightgreen   = "#93e1cd",
                                        brightyellow  = "#f2c3ae",
-                                       brightmagenta = "#d2bcf0"
-)
+                                       brightmagenta = "#d2bcf0")
+
+thanatos_light <- generate_named_colors(background    = "#F9D9D9",
+                                        text          = "#3a5068",
+                                        line          = "#3a5068")
 
 #' @export
 #' @include theme_generator.R
 theme_thanatos_dark <- generate_theme_from_colors(thanatos_dark)
+
+#' @export
+#' @include theme_generator.R
+theme_thanatos_light <- generate_theme_from_colors(thanatos_light)
 
 #' @export
 #' @include theme_generator.R
@@ -29,6 +36,7 @@ thanatos_dark_fill_with_name <- generate_scale_fill_with_name(thanatos_dark)
 #' @include theme_generator.R
 thanatos_dark_color_discrete <- generate_scale_color_discrete("thanatos-dark",
                                                               thanatos_dark)
+
 #' @export
 #' @include theme_generator.R
 thanatos_dark_fill_discrete <- generate_scale_fill_discrete("thanatos-dark",
