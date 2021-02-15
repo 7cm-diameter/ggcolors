@@ -1,22 +1,23 @@
-iceberg_dark <- generate_named_color(black = "#161821",  red = "#e27878",
-                                      green = "#b4be82", yellow = "#e2a478",
-                                      blue = "#84a0c6", magenta = "#a093c7",
-                                      cyan = "#89b8c2", white = "#d2d4de",
-                                      brightblack = "#6b7089",
+iceberg_dark <- generate_named_colors(background = "#161821",
+                                      line = "#6b7089",
+                                      text = "#d2d4de",
+                                      red = "#e27878", green = "#b4be82",
+                                      yellow = "#e2a478", blue = "#84a0c6",
+                                      magenta = "#a093c7", cyan = "#89b8c2",
                                       brightred = "#e98989",
                                       brightgreen = "#c0ca8e",
                                       brightyellow = "#e9b189",
                                       brightblue = "#91acd1",
                                       brightmagenta = "#ada0d3",
-                                      brightcyan = "#95c4ce",
-                                      brightwhite = "#d2d4de")
+                                      brightcyan = "#95c4ce")
 
-iceberg_light <- generate_named_color(black = "#33374c", white = "#dcdfe7",
+iceberg_light <- generate_named_colors(background = "#dcdfe7",
+                                       line = "#8389a3",
+                                       text = "#33374c",
                                        red = "#cc517a", green = "#668e3d",
                                        yellow = "#c57339", blue = "#2d539e",
                                        magenta = "#7759b4", cyan = "#3f83a6",
                                        brightblack = "#262a3f",
-                                       brightwhite = "#8389a3",
                                        brightred = "#cc3768",
                                        brightgreen = "#598030",
                                        brightyellow = "#b6662d",
@@ -26,11 +27,11 @@ iceberg_light <- generate_named_color(black = "#33374c", white = "#dcdfe7",
 
 #' @export
 #' @include theme_generator.R
-theme_iceberg_dark <- generate_dark_theme_from(iceberg_dark)
+theme_iceberg_dark <- generate_theme_from_colors(iceberg_dark)
 
 #' @export
 #' @include theme_generator.R
-theme_iceberg_light <- generate_light_theme_from(iceberg_light)
+theme_iceberg_light <- generate_theme_from_colors(iceberg_light)
 
 #' @export
 #' @include theme_generator.R

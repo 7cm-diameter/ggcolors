@@ -1,14 +1,14 @@
 # helper functions to generate a color theme
-remove_bw <- function(pallet) {
-  removed_colors <- c("black", "white", "brightblack", "brightwhite")
+remove_theme_color <- function(colors) {
+  removed_colors <- c("background", "line", "text")
   for (rc in removed_colors) {
-    pallet[rc] <- NA
+    colors[rc] <- NA
   }
-  return(Filter(function(x) !is.na(x), pallet))
+  return(Filter(function(x) !is.na(x), colors))
 }
 
 generate_pallet <- function(colors) {
-  colors <- remove_bw(colors)
+  colors <- remove_theme_color(colors)
   max_n <- length(colors)
   f <- function(n) {
     ntimes <- n %/% max_n + 1
@@ -19,10 +19,8 @@ generate_pallet <- function(colors) {
 }
 
 #' @export
-generate_named_color <- function(black, white, brightblack, brightwhite, ...) {
-  return(c(black = black, white = white,
-           brightblack = brightblack,
-           brightwhite = brightwhite, ...))
+generate_named_colors <- function(background, line, text, ...) {
+  return(c(background = background, line = line, text = text, ...))
 }
 
 #' @importFrom ggplot2 theme
@@ -30,23 +28,23 @@ generate_named_color <- function(black, white, brightblack, brightwhite, ...) {
 #' @importFrom ggplot2 element_rect
 #' @importFrom ggplot2 element_text
 #' @export
-generate_dark_theme_from <- function(colors) {
+generate_theme_from_colors <- function(colors) {
   inner <- function(...) {
-    theme(plot.background = element_rect(fill = colors["black"]),
-          panel.background = element_rect(fill = colors["black"]),
-          panel.grid.major = element_line(color = colors["brightblack"]),
-          panel.grid.minor = element_line(color = colors["brightblack"]),
-          panel.border = element_rect(color = colors["brightblack"], fill = NA),
-          legend.background = element_rect(color = colors["brightblack"],
-                                           fill = colors["black"]),
-          legend.key = element_rect(fill = colors["black"]),
-          legend.title = element_text(color = colors["white"]),
-          legend.text = element_text(color = colors["white"]),
-          strip.background = element_rect(color = colors["brightblack"]),
-          axis.text = element_text(color = colors["brightwhite"]),
-          axis.line = element_line(color = colors["brightblack"]),
-          axis.ticks = element_line(color = colors["brightblack"]),
-          axis.title = element_text(color = colors["white"]),
+    theme(plot.background = element_rect(fill = colors["background"]),
+          panel.background = element_rect(fill = colors["background"]),
+          panel.grid.major = element_line(color = colors["line"]),
+          panel.grid.minor = element_line(color = colors["line"]),
+          panel.border = element_rect(color = colors["line"], fill = NA),
+          legend.background = element_rect(color = colors["line"],
+                                           fill = colors["background"]),
+          legend.key = element_rect(fill = colors["background"]),
+          legend.title = element_text(color = colors["text"]),
+          legend.text = element_text(color = colors["text"]),
+          strip.background = element_rect(color = colors["background"]),
+          axis.text = element_text(color = colors["text"]),
+          axis.line = element_line(color = colors["line"]),
+          axis.ticks = element_line(color = colors["line"]),
+          axis.title = element_text(color = colors["text"]),
           ...
     )
   }
@@ -58,23 +56,23 @@ generate_dark_theme_from <- function(colors) {
 #' @importFrom ggplot2 element_rect
 #' @importFrom ggplot2 element_text
 #' @export
-generate_light_theme_from <- function(pallet) {
+generate_theme <- function(background, line, text) {
   inner <- function(...) {
-    theme(plot.background = element_rect(fill = pallet["white"]),
-          panel.background = element_rect(fill = pallet["white"]),
-          panel.grid.major = element_line(color = pallet["brightwhite"]),
-          panel.grid.minor = element_line(color = pallet["brightwhite"]),
-          panel.border = element_rect(color = pallet["brightwhite"], fill = NA),
-          legend.background = element_rect(color = pallet["brightwhite"],
-                                           fill = pallet["white"]),
-          legend.key = element_rect(fill = pallet["white"]),
-          legend.title = element_text(color = pallet["black"]),
-          legend.text = element_text(color = pallet["black"]),
-          strip.background = element_rect(color = pallet["brightwhite"]),
-          axis.text = element_text(color = pallet["brightblack"]),
-          axis.line = element_line(color = pallet["brightwhite"]),
-          axis.ticks = element_line(color = pallet["brightwhite"]),
-          axis.title = element_text(color = pallet["black"]),
+    theme(plot.background = element_rect(fill = background),
+          panel.background = element_rect(fill = background),
+          panel.grid.major = element_line(color = line),
+          panel.grid.minor = element_line(color = line),
+          panel.border = element_rect(color = line, fill = NA),
+          legend.background = element_rect(color = line,
+                                           fill = background),
+          legend.key = element_rect(fill = background),
+          legend.title = element_text(color = text),
+          legend.text = element_text(color = text),
+          strip.background = element_rect(color = background),
+          axis.text = element_text(color = text),
+          axis.line = element_line(color = line),
+          axis.ticks = element_line(color = line),
+          axis.title = element_text(color = text),
           ...
     )
   }
