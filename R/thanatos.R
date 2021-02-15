@@ -3,23 +3,19 @@ thanatos_dark <- generate_named_colors(background    = "#3a5068",
                                        text          = "#f06989",
                                        red           = "#e68ca3",
                                        blue          = "#448ea9",
-                                       green         = "#48CBAC",
-                                       yellow        = "#EE9775",
-                                       magenta       = "#BE91EB",
+                                       green         = "#48cbac",
+                                       yellow        = "#ee9775",
+                                       magenta       = "#be91eb",
                                        brightred     = "#e8a7c2",
                                        brightblue    = "#77a4b9",
-                                       brightgreen   = "#93E1CD",
-                                       brightyellow  = "#F2C3AE",
-                                       brightmagenta = "#D2BCF0"
+                                       brightgreen   = "#93e1cd",
+                                       brightyellow  = "#f2c3ae",
+                                       brightmagenta = "#d2bcf0"
 )
 
 #' @export
 #' @include theme_generator.R
 theme_thanatos_dark <- generate_theme_from_colors(thanatos_dark)
-
-#' @export
-#' @include theme_generator.R
-theme_thanatos_light <- generate_light_theme_from(thanatos_light)
 
 #' @export
 #' @include theme_generator.R
