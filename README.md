@@ -3,7 +3,7 @@
 In addition, `ggcolors` provide some themes based on pre-defined color schemas.
 
 # Installation
-Run `remotes::install_git("7cm-diameter/ggcolors")` and the latest version of `ggcolors` will be installed.
+Run `remotes::install_github("7cm-diameter/ggcolors")` and the latest version of `ggcolors` will be installed.
 
 # Available color themes
 + [iceberg](https://github.com/cocopon/iceberg.vim/) by [cocopon](https://github.com/cocopon)
