@@ -79,6 +79,15 @@ generate_theme <- function(background, line, text) {
   return(inner)
 }
 
+#' @importFrom ggplot2 theme
+#' @export
+theme_mixin <- function(base, colored, ...) {
+  inner <- function(...) {
+    base + colored + theme(...)
+  }
+  return(inner)
+}
+
 #' @importFrom ggplot2 scale_color_manual
 #' @export
 generate_scale_color_with_name <- function(colors) {
