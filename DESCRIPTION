@@ -16,5 +16,6 @@ RoxygenNote: 7.1.1
 Collate: 
     'theme_generator.R'
     'iceberg.R'
+    'moment.R'
     'thanatos.R'
 Imports: ggplot2
