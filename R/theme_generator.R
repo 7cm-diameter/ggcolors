@@ -1,6 +1,6 @@
 # helper functions to generate a color theme
 remove_theme_color <- function(colors) {
-  removed_colors <- c("background", "line", "text")
+  removed_colors <- c("background", "line", "text", "black", "white")
   for (rc in removed_colors) {
     colors[rc] <- NA
   }
