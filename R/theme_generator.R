@@ -71,7 +71,7 @@ generate_theme <- function(background, line, text) {
           legend.title = element_text(color = text),
           legend.text = element_text(color = text),
           strip.background = element_rect(color = line,
-                                          fill = backgound),
+                                          fill = background),
           strip.text = element_text(color = text),
           axis.text = element_text(color = text),
           axis.line = element_line(color = line),
